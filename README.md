@@ -146,6 +146,11 @@ git push
 git add js/ui.js README.md
 git commit -m "fix(ui): sync the movie grid card state in the Search tab view when removing a favorite from the Favorites tab view with the Remove button"
 git push
+
+# 8 — Bug fix in favBtn.addEventListener() in createModalContent() function in ui.js file and update README.md
+git add js/ui.js README.md
+git commit -m "fix(ui): re-render the favorites grid when toggling saved state from the details view modal opened from the Favorites tab"
+git push 
 ```
 
 ---

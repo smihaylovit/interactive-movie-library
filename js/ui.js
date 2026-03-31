@@ -747,8 +747,11 @@ function UIController(movieService, favoritesManager) {
         favBtn.textContent = '♥ Saved';
         showToast(`"${movie.Title}" added to favorites!`, 'success');
       }
-      // Keep search grid in sync
+      // Sync the search grid card if visible
       syncCardFavButton(movie.imdbID, !nowFav, movie);
+      // Re-render the favorites grid in case it is currently visible
+      // (e.g. if details view modal was opened from the Favorites tab)
+      renderFavorites();
     });
 
     modalActions.appendChild(favBtn);
