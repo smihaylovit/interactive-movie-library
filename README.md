@@ -141,6 +141,11 @@ git pull
 git add README.md
 git commit -m "doc: add README.md"
 git push
+
+# 7 — Bug fix in removeFavorite() function in ui.js file and update README.md
+git add js/ui.js README.md
+git commit -m "fix(ui): sync the movie grid card state in the Search tab view when removing a favorite from the Favorites tab view with the Remove button"
+git push
 ```
 
 ---

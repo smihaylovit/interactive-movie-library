@@ -868,7 +868,11 @@ function UIController(movieService, favoritesManager) {
     card.style.transform  = 'scale(.95)';
 
     setTimeout(() => {
+      // Get the movie data before removing it
+      const movie = favoritesManager.getAll().find(m => m.imdbID === imdbID);
       favoritesManager.remove(imdbID);
+      // Sync the search grid card if it's visible
+      if (movie) syncCardFavButton(imdbID, false, movie);
       renderFavorites();
       showToast('Removed from favorites.', 'info');
     }, 250);
