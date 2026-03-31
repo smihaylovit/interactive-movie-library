@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CineVault — Movie Library</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">◈</span>
+        <span class="logo-text">Cine<em>Vault</em></span>
+      </div>
+      <nav class="tab-nav">
+        <button class="tab-btn active" data-tab="search">Search</button>
+        <button class="tab-btn" data-tab="favorites">
+          Favorites
+          <span class="fav-count" id="favCount">0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+  <!-- ===== MAIN ===== -->
+  <main class="main-content">
+    <!-- SEARCH TAB -->
+    <section class="tab-panel active" id="tab-search">
+      <div class="search-hero">
+        <p class="search-eyebrow">Explore the archive</p>
+        <h1 class="search-headline">What will you<br /><em>discover</em> tonight?</h1>
+        <form class="search-form" id="searchForm" novalidate>
+          <div class="search-input-wrap">
+            <span class="search-icon">⌕</span>
+            <input
+              type="text"
+              id="searchInput"
+              class="search-input"
+              placeholder="Search by title…"
+              autocomplete="off"
+              maxlength="120"
+            />
+            <button type="submit" class="search-btn">Search</button>
+          </div>
+          <p class="search-error hidden" id="searchError"></p>
+        </form>
+      </div>
+      <!-- Results area -->
+      <div class="results-area" id="resultsArea">
+        <!-- State: idle -->
+        <div class="state-idle" id="stateIdle">
+          <div class="idle-graphic">◈</div>
+          <p>Search for a movie to begin</p>
+        </div>
+        <!-- State: loading -->
+        <div class="state-loading hidden" id="stateLoading">
+          <div class="spinner"></div>
+          <p>Fetching results…</p>
+        </div>
+        <!-- State: error -->
+        <div class="state-error hidden" id="stateError">
+          <div class="error-icon">✕</div>
+          <p id="stateErrorMsg">Something went wrong.</p>
+        </div>
+        <!-- State: results -->
+        <div class="state-results hidden" id="stateResults">
+          <div class="results-header">
+            <p class="results-meta" id="resultsMeta"></p>
+          </div>
+          <div class="movie-grid" id="movieGrid"></div>
+          <!-- Pagination -->
+          <div class="pagination" id="pagination"></div>
+        </div>
+      </div>
+    </section>
+    <!-- FAVORITES TAB -->
+    <section class="tab-panel hidden" id="tab-favorites">
+      <div class="favorites-header">
+        <h2 class="favorites-headline">Your <em>Collection</em></h2>
+        <p class="favorites-sub">Movies you've saved for later</p>
+      </div>
+      <div class="favorites-area" id="favoritesArea">
+        <!-- State: empty -->
+        <div class="state-idle" id="favEmpty">
+          <div class="idle-graphic">♡</div>
+          <p>No favorites yet — add some from search results</p>
+        </div>
+        <!-- Favorites grid -->
+        <div class="movie-grid hidden" id="favoritesGrid"></div>
+      </div>
+    </section>
+  </main>
+  <!-- ===== MODAL ===== -->
+  <div class="modal-overlay hidden" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+      <div class="modal-body" id="modalBody">
+        <!-- Populated dynamically with movie details view -->
+      </div>
+    </div>
+  </div>
+  <!-- ===== TOAST NOTIFICATION ===== -->
+  <div class="toast-container" id="toastContainer"></div>
+  <!-- ===== SCRIPTS ===== -->
+  <!--
+    Script load order (no bundler):
+    1. api.js       — MovieService: all OMDb API calls
+    2. favorites.js — FavoritesManager: localStorage CRUD
+    3. ui.js        — UIController: DOM rendering & events
+    4. app.js       — Entry point: wires everything together
+  -->
+  <script src="js/api.js"></script>
+  <script src="js/favorites.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
